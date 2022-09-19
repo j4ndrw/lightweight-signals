@@ -1,19 +1,19 @@
 type SignalType = "primitive" | "computed";
 
-type Effect = {
+type EffectPrimitive = {
     fn: () => void | { cleanup: () => void };
     cleanup?: void | (() => void);
 };
 
-class Signal<T> {
+class SignalPrimitive<T> {
     type: SignalType;
 
     value: T;
     prevValue: T | null = null;
 
-    links: Set<Signal<unknown>> = new Set();
+    links: Set<SignalPrimitive<unknown>> = new Set();
 
-    effects: Effect[];
+    effects: EffectPrimitive[];
 
     compute?: () => T;
 
@@ -42,7 +42,7 @@ class Signal<T> {
         this.set(setter(this.value));
     }
 
-    linkWith<TSignal>(signals: Signal<TSignal>[]) {
+    linkWith<TSignal>(signals: SignalPrimitive<TSignal>[]) {
         signals.forEach((signal) => {
             this.links.add(signal);
             signal.links.add(this);
@@ -61,17 +61,34 @@ class Signal<T> {
     }
 }
 
+export type Signal<T> = Omit<
+    SignalPrimitive<T>,
+    | "addEffect"
+    | "runEffects"
+    | "linkWith"
+    | "prevValue"
+    | "type"
+    | "links"
+    | "effects"
+    | "compute"
+>;
+export type Computed<T> = Signal<T>;
+
 export const signal = <T>(
     value: T,
     type: SignalType = "primitive"
-): Signal<T> => new Signal(value, type);
+): Signal<T> => new SignalPrimitive(value, type);
 
 export const computed = <TResult, TDep>(
     computeFn: () => TResult,
     deps: Signal<TDep>[]
-): Signal<TResult> => {
-    const computedSignal = new Signal(computeFn(), "computed", computeFn);
-    computedSignal.linkWith(deps);
+): Computed<TResult> => {
+    const computedSignal = new SignalPrimitive(
+        computeFn(),
+        "computed",
+        computeFn
+    );
+    computedSignal.linkWith((deps as SignalPrimitive<TDep>[]));
 
     return computedSignal;
 };
@@ -85,5 +102,5 @@ export const effect = <TDep>(
         return;
     }
 
-    deps.forEach((dep) => dep.addEffect(effectFn));
+    (deps as SignalPrimitive<TDep>[]).forEach((dep) => dep.addEffect(effectFn));
 };
