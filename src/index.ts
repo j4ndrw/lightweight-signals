@@ -34,9 +34,7 @@ class SignalPrimitive<T> {
         this.value = newValue;
 
         this.runEffects();
-        this.links.forEach((link) => {
-            if (link.type === "computed") link.set(link.compute!());
-        });
+        this.recomputeComputedSignals();
     }
     setFrom(setter: (prevValue: T) => T) {
         this.set(setter(this.value));
@@ -53,10 +51,16 @@ class SignalPrimitive<T> {
         this.effects.push({ fn: effectFn });
     }
 
-    runEffects() {
+    private runEffects() {
         this.effects.forEach((effect) => {
             if (effect.cleanup) effect.cleanup();
             effect.cleanup = effect.fn()?.cleanup;
+        });
+    }
+
+    private recomputeComputedSignals() {
+        this.links.forEach((link) => {
+            if (link.type === "computed") link.set(link.compute!());
         });
     }
 }
@@ -64,7 +68,6 @@ class SignalPrimitive<T> {
 export type Signal<T> = Omit<
     SignalPrimitive<T>,
     | "addEffect"
-    | "runEffects"
     | "linkWith"
     | "prevValue"
     | "type"
