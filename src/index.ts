@@ -72,7 +72,7 @@ export type Signal<T> = Omit<
     | "effects"
     | "compute"
 >;
-export type Computed<T> = Signal<T>;
+export type Computed<T> = Omit<Signal<T>, "set" | "setFrom">;
 
 export const signal = <T>(
     value: T,
@@ -88,14 +88,14 @@ export const computed = <TResult, TDep>(
         "computed",
         computeFn
     );
-    computedSignal.linkWith((deps as SignalPrimitive<TDep>[]));
+    computedSignal.linkWith(deps as SignalPrimitive<TDep>[]);
 
     return computedSignal;
 };
 
 export const effect = <TDep>(
     effectFn: () => void | { cleanup: () => void },
-    deps: Signal<TDep>[]
+    deps: (Signal<TDep> | Computed<TDep>)[]
 ): void => {
     if (deps.length === 0) {
         effectFn();
