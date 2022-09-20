@@ -7,6 +7,7 @@
   "author": "j4ndrw <murjan_andreialin@yahoo.com>",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "devDependencies": {
