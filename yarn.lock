@@ -1703,10 +1703,10 @@ leven@^3.1.0:
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
   integrity sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==
 
-lightweight-signals@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/lightweight-signals/-/lightweight-signals-1.1.1.tgz#9b40396d3ecf11056141b28754fe6497245218c6"
-  integrity sha512-ZuEwM8AcnEDHT6qr2QTtOweF1Y4o2qVxykVJNYXNsiyFdzHq5SGj93/rjKlNL8L83AN7q4+E+370M7V4IuI7AQ==
+lightweight-signals@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/lightweight-signals/-/lightweight-signals-1.2.1.tgz#88577e1d57a7075ab9bfc139ed8e1fd5620510c7"
+  integrity sha512-u8dyd1vD1GkVTarKkAmPBbHoxHpQE+fs9lya1uO6byYXVJHtBf+tpUBSPd1AYDy7XVRdcchmnHvvthOTyvjmOQ==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
