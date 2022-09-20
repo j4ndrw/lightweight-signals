@@ -4,15 +4,15 @@ describe("Computed signals", () => {
     it("should update when the signal that it is subscribed to update", () => {
         const num = signal(0);
         const parity = computed(
-            () => (num.value % 2 === 0 ? "even" : "odd"),
+            () => (num.unwrap() % 2 === 0 ? "even" : "odd"),
             [num]
         );
 
-        expect(parity.value).toBe("even");
+        expect(parity.unwrap()).toBe("even");
 
         num.setFrom((prev) => prev + 1);
 
-        expect(parity.value).toBe("odd");
+        expect(parity.unwrap()).toBe("odd");
     });
 
     it("should update when the signals that it is subscribed to update", () => {
@@ -21,13 +21,13 @@ describe("Computed signals", () => {
 
         const wordsThatStartWithA = computed(
             () =>
-                [...sounds.value, ...words.value].filter((word) =>
+                [...sounds.unwrap(), ...words.unwrap()].filter((word) =>
                     word.startsWith("A")
                 ),
             [sounds, words]
         );
 
-        expect(wordsThatStartWithA.value).toStrictEqual([
+        expect(wordsThatStartWithA.unwrap()).toStrictEqual([
             "Argh",
             "Aha",
             "Ayy",
@@ -37,7 +37,7 @@ describe("Computed signals", () => {
         sounds.set(['Aaaaaaaa']);
         words.set(['chair']);
 
-        expect(wordsThatStartWithA.value).toStrictEqual(['Aaaaaaaa']);
+        expect(wordsThatStartWithA.unwrap()).toStrictEqual(['Aaaaaaaa']);
     });
 
     it("should call the compute function only when the deps in the dep array change", () => {
@@ -52,7 +52,7 @@ describe("Computed signals", () => {
         b.set(0);
         c.set(0);
 
-        comp.value;
+        comp.unwrap();
 
         expect(computeFn).toBeCalledTimes(3);
 
@@ -64,7 +64,7 @@ describe("Computed signals", () => {
         const computeFn = jest.fn(() => null);
         const comp = computed(computeFn, []);
 
-        comp.value;
+        comp.unwrap();
 
         expect(computeFn).toBeCalledTimes(1);
 

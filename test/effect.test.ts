@@ -49,7 +49,7 @@ describe("Effects", () => {
     it("should run the effect after the computed dependency updates", () => {
         const a = signal(1);
 
-        const b = computed(() => (a.value === 3 ? "three" : "not three"), [a]);
+        const b = computed(() => (a.unwrap() === 3 ? "three" : "not three"), [a]);
 
         const effectFn = jest.fn(() => {});
         effect(effectFn, [b]);

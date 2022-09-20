@@ -29,6 +29,10 @@ class SignalPrimitive<T> {
         }
     }
 
+    unwrap() {
+        return this.value
+    }
+
     set(newValue: T) {
         this.prevValue = this.value;
         this.value = newValue;
@@ -69,6 +73,7 @@ export type Signal<T> = Omit<
     SignalPrimitive<T>,
     | "addEffect"
     | "linkWith"
+    | "value"
     | "prevValue"
     | "type"
     | "links"
