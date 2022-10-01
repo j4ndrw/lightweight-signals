@@ -1,9 +1,23 @@
 {
   "name": "lightweight-signals",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "A lightweight signal-based state management library. Heavily inspired by SolidJS.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "default": "./dist/react/index.js"
+    }
+  },
   "repository": "git@github.com:j4ndrw/lightweight-signals.git",
   "author": "j4ndrw <murjan_andreialin@yahoo.com>",
   "license": "MIT",
