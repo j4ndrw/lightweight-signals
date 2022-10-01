@@ -41,7 +41,7 @@ count.setFrom(prev => prev - 3);
 
 ```tsx
 // useStore.tsx
-import { useSignalStore } from 'lightweight-signals/react';
+import { useSignalStore } from 'lightweight-signals/dist/react';
 
 interface Store {
     realName: string,
