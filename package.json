@@ -2,37 +2,37 @@
     "name": "lightweight-signals",
     "version": "1.4.9",
     "description": "A lightweight signal-based state management library. Heavily inspired by SolidJS.",
-    "main": ".",
-    "types": ".",
+    "main": "dist",
+    "types": "dist",
     "exports": {
         ".": {
             "require": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
+                "types": "./index.d.ts",
+                "default": "./index.js"
             },
             "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
+                "types": "./index.d.ts",
+                "default": "./index.js"
             }
         },
         "./core": {
             "require": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
+                "types": "./index.d.ts",
+                "default": "./index.js"
             },
             "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
+                "types": "./index.d.ts",
+                "default": "./index.js"
             }
         },
         "./react": {
             "require": {
-                "types": "./dist/react/index.d.ts",
-                "default": "./dist/react/index.js"
+                "types": "./react/index.d.ts",
+                "default": "./react/index.js"
             },
             "import": {
-                "types": "./dist/react/index.d.ts",
-                "default": "./dist/react/index.js"
+                "types": "./react/index.d.ts",
+                "default": "./react/index.js"
             }
         }
     },
