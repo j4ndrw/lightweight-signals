@@ -48,7 +48,7 @@ interface Store {
     heroName: string,
 }
 
-const store = {
+const store: Store = {
     realName: "Peter Parker",
     heroName: "Spider-Man"
 }
