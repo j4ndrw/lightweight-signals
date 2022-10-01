@@ -27,7 +27,8 @@ test("should rerender on every write", () => {
     });
     expect(renderCount).toBe(4);
 
-    expect(store.select('number')).toBe(4);
+    const { number } = store.unwrap();
+    expect(number).toBe(4);
     expect(renderCount).toBe(4);
 });
 
@@ -40,6 +41,6 @@ test("should not rerender on read", () => {
     const { store } = result.current;
     expect(renderCount).toBe(1);
 
-    const value = store.select('number');
+    const { number } = store.unwrap();
     expect(renderCount).toBe(1);
 });
