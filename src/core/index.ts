@@ -29,10 +29,18 @@ export class SignalPrimitive<T> {
         }
     }
 
+    /**
+     * Returns the value of the signal
+     */
     unwrap() {
         return this.value;
     }
 
+    /**
+     * Sets the value of the signal. It also has the following side effects:
+     * - Causes effects linked to this signal to rerun
+     * - Causes computed signals to be recomputed
+     */
     set(newValue: T) {
         this.prevValue = this.value;
         this.value = newValue;
@@ -40,6 +48,12 @@ export class SignalPrimitive<T> {
         this.runEffects();
         this.recomputeComputedSignals();
     }
+
+    /**
+     * Sets the value of the signal based on the signal's previous value. It also has the following side effects:
+     * - Causes effects linked to this signal to rerun
+     * - Causes computed signals to be recomputed
+     */
     setFrom(setter: (prevValue: T) => T) {
         this.set(setter(this.value));
     }

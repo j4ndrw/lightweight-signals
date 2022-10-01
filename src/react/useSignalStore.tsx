@@ -28,6 +28,9 @@ function makeProxySignal<T>(value: T, onSet: (newSignal: Signal<T>) => void) {
     return proxySignal;
 }
 
+/**
+ * Creates a store signal.
+ */
 export function useSignalStore<T extends object>(value: T) {
     const [proxySignal, setProxySignal] = useState(
         makeProxySignal(value, (newSignal) => {
@@ -37,14 +40,24 @@ export function useSignalStore<T extends object>(value: T) {
 
     return {
         store: {
+            /**
+             * Returns the value of the signal
+             */
             unwrap: () => proxySignal.unwrap(),
-            select: (key: keyof T) => proxySignal.unwrap()[key],
+
+            /**
+             * Sets the value of a field in the store.
+             */
             set: (key: keyof T, value: T[keyof T]) => {
                 proxySignal.setFrom((prevSignal) => ({
                     ...prevSignal,
                     [key]: value,
                 }));
             },
+
+            /**
+             * Sets the value of the signal based on the signal's previous value.
+             */
             setFrom: (
                 key: keyof T,
                 setter: (prevValue: T[keyof T]) => T[keyof T]
