@@ -1,6 +1,6 @@
 {
     "name": "lightweight-signals",
-    "version": "1.4.9",
+    "version": "1.4.10",
     "description": "A lightweight signal-based state management library. Heavily inspired by SolidJS.",
     "main": "dist",
     "types": "dist",
