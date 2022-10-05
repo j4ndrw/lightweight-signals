@@ -16,12 +16,15 @@ export const computed = <TResult, TDep>(
 
 export const effect = <TDep>(
     effectFn: () => void | { cleanup: () => void },
-    deps: (Signal<TDep> | Computed<TDep>)[]
+    deps: SignalSnapshot<TDep>[],
+    options?: EffectOptions,
 ): void => {
     if (deps.length === 0) {
         effectFn();
         return;
     }
 
-    (deps as SignalPrimitive<TDep>[]).forEach((dep) => dep.addEffect(effectFn));
+    if (options?.shouldAlsoRunOn === 'mount') effectFn();
+
+    deps.forEach((dep) => (dep as SignalPrimitive<TDep>).addEffect(effectFn));
 };
