@@ -8,7 +8,7 @@ I mostly implemented those to learn more about ways of implementing reactivity. 
 
 ## React bindings
 
-React already comes with reactive primitives, but I wanted to add a simple way to create a store. The `useSignalStore` binding is heavily inspired by [Valtio](https://github.com/pmndrs/valtio), where, rerenders are only caused by updating values in the store, and not by reading from the store.
+React already comes with reactive primitives, but I wanted to add a simple way to create a store. The `useSignalStore` binding is heavily inspired by [Valtio](https://github.com/pmndrs/valtio).
 
 ## Usage
 
