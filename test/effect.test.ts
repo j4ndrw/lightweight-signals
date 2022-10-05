@@ -49,7 +49,10 @@ describe("Effects", () => {
     it("should run the effect after the computed dependency updates", () => {
         const a = signal(1);
 
-        const b = computed(() => (a.unwrap() === 3 ? "three" : "not three"), [a]);
+        const b = computed(
+            () => (a.unwrap() === 3 ? "three" : "not three"),
+            [a]
+        );
 
         const effectFn = jest.fn(() => {});
         effect(effectFn, [b]);
@@ -58,5 +61,22 @@ describe("Effects", () => {
         a.set(4);
 
         expect(effectFn).toBeCalledTimes(2);
+    });
+
+    it("should also run the effect on mount if specified", () => {
+        const a = signal(1);
+
+        const b = computed(
+            () => (a.unwrap() === 3 ? "three" : "not three"),
+            [a]
+        );
+
+        const effectFn = jest.fn(() => {});
+        effect(effectFn, [b], { shouldAlsoRunOn: "mount" });
+
+        a.set(3);
+        a.set(4);
+
+        expect(effectFn).toBeCalledTimes(3);
     });
 });

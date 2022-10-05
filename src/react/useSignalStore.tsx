@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Signal, signal, SignalPrimitive } from "../core";
+import { Signal, signal } from "../core";
+import { SignalPrimitive } from "../core/internals";
 
 type StoreSetter<T extends object> = (prevValue: T[keyof T]) => T[keyof T];
 
