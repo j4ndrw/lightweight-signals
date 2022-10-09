@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Signal, signal } from "../core";
 import { SignalPrimitive } from "../core/internals";
 
-type StoreSetter<T extends object> = (prevValue: T[keyof T]) => T[keyof T];
-
 function makeProxySignal<T>(value: T, onSet: (newSignal: Signal<T>) => void) {
     const proxySignal = new Proxy(signal(value), {
         set(target, p, newValue, receiver) {
