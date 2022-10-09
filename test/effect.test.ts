@@ -1,4 +1,4 @@
-import { computed, effect, signal } from "../src";
+import { computed, effect, signal } from "../src/core";
 
 describe("Effects", () => {
     it("should run whenever a dependency updates", () => {

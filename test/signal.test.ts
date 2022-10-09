@@ -1,4 +1,4 @@
-import { signal } from "../src";
+import { signal } from "../src/core";
 
 describe("Signals", () => {
     it("should have a set value once created", () => {

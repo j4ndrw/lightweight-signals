@@ -1,4 +1,4 @@
-import { computed, signal } from "../src";
+import { computed, signal } from "../src/core";
 
 describe("Computed signals", () => {
     it("should update when the signal that it is subscribed to update", () => {

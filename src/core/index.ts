@@ -6,25 +6,25 @@ export { Signal, Computed };
 export const signal = <T>(value: T): Signal<T> =>
     signalPrimitive(value, "primitive");
 
-export const computed = <TResult, TDep>(
+export const computed = <TResult>(
     computeFn: () => TResult,
-    deps: Signal<TDep>[]
+    deps: SignalSnapshot<unknown>[]
 ): Computed<TResult> =>
     signalPrimitive(computeFn(), "computed", computeFn).linkWith(
-        deps as SignalPrimitive<TDep>[]
+        deps as SignalPrimitive<unknown>[]
     );
 
 export const effect = <TDep>(
     effectFn: () => void | { cleanup: () => void },
     deps: SignalSnapshot<TDep>[],
-    options?: EffectOptions,
+    options?: EffectOptions
 ): void => {
     if (deps.length === 0) {
         effectFn();
         return;
     }
 
-    if (options?.shouldAlsoRunOn === 'mount') effectFn();
+    if (options?.shouldAlsoRunOn === "mount") effectFn();
 
     deps.forEach((dep) => (dep as SignalPrimitive<TDep>).addEffect(effectFn));
 };
